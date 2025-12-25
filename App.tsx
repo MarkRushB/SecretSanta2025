@@ -122,14 +122,14 @@ const App: React.FC = () => {
       <main className="w-full max-w-5xl bg-[#e6b98a] border-8 border-[#5a3a2a] rounded-xl shadow-[0_12px_0_0_#3a2115] overflow-hidden flex flex-col lg:flex-row h-[78vh] min-h-[500px]">
         
         {/* Left Control Panel */}
-        <div className="flex-1 p-6 bg-[#fdf5e6] border-r-8 border-[#5a3a2a] flex flex-col">
+        <div className="flex-1 p-6 bg-[#fdf5e6] border-r-8 border-[#5a3a2a] flex flex-col h-full overflow-hidden">
           {gameStage === GameStage.SETUP && (
-            <div className="space-y-4 flex-1 flex flex-col">
-              <div className="flex items-center gap-2 border-b-4 border-[#5a3a2a] pb-2">
+            <div className="space-y-4 flex-1 flex flex-col h-full overflow-hidden">
+              <div className="flex items-center gap-2 border-b-4 border-[#5a3a2a] pb-2 flex-shrink-0">
                 <h2 className="text-3xl font-black text-[#5a3a2a] tracking-wider">参加活动的朋友</h2>
               </div>
               
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-shrink-0">
                 <input
                   type="text"
                   value={newName}
@@ -150,13 +150,13 @@ const App: React.FC = () => {
                 {participants.length === 0 ? (
                   <p className="text-center text-[#8a6b4a] py-8 text-2xl">等待添加名单...</p>
                 ) : (
-                  <ul className="grid grid-cols-1 gap-2">
+                  <ul className="flex flex-col gap-2">
                     {participants.map((p) => (
                       <li key={p.id} className="flex items-center justify-between bg-white/60 p-3 border-2 border-[#5a3a2a] group hover:bg-white transition-colors">
-                        <span className="text-3xl font-bold tracking-wide">{p.name}</span>
+                        <span className="text-3xl font-bold tracking-wide truncate pr-2">{p.name}</span>
                         <button
                           onClick={() => removeParticipant(p.id)}
-                          className="text-[#5a3a2a] opacity-40 group-hover:opacity-100 hover:text-red-700 transition-opacity"
+                          className="text-[#5a3a2a] opacity-40 group-hover:opacity-100 hover:text-red-700 transition-opacity flex-shrink-0"
                         >
                           <Trash2 size={24} />
                         </button>
@@ -169,7 +169,7 @@ const App: React.FC = () => {
               {participants.length >= 2 && (
                 <button
                   onClick={startGame}
-                  className="w-full pixel-btn bg-[#e65c5c] hover:bg-[#c44b4b] text-3xl py-4 flex items-center justify-center gap-4 shadow-[0_6px_0_0_#803434] mt-auto"
+                  className="w-full pixel-btn bg-[#e65c5c] hover:bg-[#c44b4b] text-3xl py-4 flex items-center justify-center gap-4 shadow-[0_6px_0_0_#803434] mt-auto flex-shrink-0"
                 >
                   准备抽签
                 </button>
@@ -183,7 +183,7 @@ const App: React.FC = () => {
                 <div className="absolute -top-3 -left-3 w-6 h-6 bg-[#5a3a2a] rotate-45"></div>
                 <div className="absolute -top-3 -right-3 w-6 h-6 bg-[#5a3a2a] rotate-45"></div>
                 <p className="text-[#8a6b4a] text-xl font-black mb-2">现在轮到</p>
-                <p className="text-7xl font-black text-[#5a3a2a] tracking-widest leading-none">
+                <p className="text-7xl font-black text-[#5a3a2a] tracking-widest leading-none truncate px-2">
                   {currentGiver}
                 </p>
                 <p className="text-[#8a6b4a] text-xl font-black mt-4">抽签了！</p>
@@ -217,7 +217,7 @@ const App: React.FC = () => {
                     <div className="flex flex-col items-center gap-2">
                       <span className="text-2xl font-black text-[#8a6b4a]">{currentGiver} 的</span>
                       <span className="text-3xl font-black text-[#71aa34]">守护对象是</span>
-                      <span className="text-8xl font-black text-[#5a3a2a] tracking-tight leading-none py-4">
+                      <span className="text-8xl font-black text-[#5a3a2a] tracking-tight leading-none py-4 truncate w-full px-2">
                         {lastDrawnReceiver}
                       </span>
                     </div>
