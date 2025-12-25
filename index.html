@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>守护天使抽奖 - 汪汪像素版</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+          --pixel-bg: #fdf5e6;
+          --pixel-wood: #a66c3c;
+          --pixel-wood-dark: #5a3a2a;
+          --pixel-grass: #71aa34;
+        }
+
+        body {
+            font-family: 'DotGothic16', sans-serif;
+            image-rendering: pixelated;
+        }
+
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* Pixel borders */
+        .pixel-box {
+            background: white;
+            border: 4px solid var(--pixel-wood-dark);
+            box-shadow: 4px 4px 0 0 rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .pixel-box::before {
+            content: '';
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
+            border: 2px solid var(--pixel-wood);
+            pointer-events: none;
+        }
+
+        .pixel-btn {
+            background: var(--pixel-wood);
+            color: white;
+            border: 4px solid var(--pixel-wood-dark);
+            padding: 8px 16px;
+            position: relative;
+            transition: transform 0.1s;
+            font-family: 'DotGothic16', sans-serif;
+        }
+
+        .pixel-btn:active {
+            transform: translate(2px, 2px);
+        }
+
+        /* 使用 margin 以避免与 Tailwind 的 -translate-x 冲突 */
+        @keyframes pixel-shake {
+            0% { margin-left: 0px; margin-top: 0px; }
+            25% { margin-left: -2px; margin-top: 2px; }
+            50% { margin-left: 2px; margin-top: -1px; }
+            75% { margin-left: -1px; margin-top: -2px; }
+            100% { margin-left: 0px; margin-top: 0px; }
+        }
+
+        .animate-pixel-shake {
+            animation: pixel-shake 0.1s infinite;
+        }
+
+        @keyframes pixel-poop-fall {
+            0% { transform: translateY(0); opacity: 1; }
+            /* 增加下落距离确保能接触到底部的礼物堆，高台约380px，420px确保触地 */
+            95% { transform: translateY(420px); opacity: 1; }
+            100% { transform: translateY(420px) scaleX(1.6) scaleY(0.5); opacity: 1; }
+        }
+
+        .animate-pixel-fall {
+            animation: pixel-poop-fall 1s cubic-bezier(0.5, 0, 0.8, 0.2) forwards;
+        }
+
+        @keyframes gift-drop {
+            0% { transform: translateY(-420px) scale(0.5); opacity: 0; }
+            20% { opacity: 1; }
+            70% { transform: translateY(0) scale(1); }
+            85% { transform: translateY(-25px) scale(1.1); }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .animate-gift-drop {
+            animation: gift-drop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+        
+        input {
+            font-family: 'DotGothic16', sans-serif;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+</head>
+<body class="bg-[#78b3e8] text-[#3a2e39] overflow-x-hidden">
+    <div id="root"></div>
+</body>
+</html>
